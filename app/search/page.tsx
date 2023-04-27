@@ -22,6 +22,7 @@ const select = {
   cuisine: true,
   location: true,
   slug: true,
+  reviews: true
 };
 
 const fetchLocations = async () => {
