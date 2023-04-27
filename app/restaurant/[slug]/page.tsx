@@ -6,14 +6,11 @@ import Description from "./components/Description";
 import Images from "./components/Images";
 import Reviews from "./components/Reviews";
 import ReservationCard from "./components/ReservationCard";
-import { PrismaClient } from "@prisma/client";
-
+import prisma from "../../../prisma/prismaClient";
 
 export const metadata = {
-  title: 'Milestones Grill | OpenTable',
-}
-
-const prisma = new PrismaClient();
+  title: "Milestones Grill | OpenTable",
+};
 
 interface Restaurant {
   id: number;
@@ -26,15 +23,15 @@ interface Restaurant {
 const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
   const restaurant = await prisma.restaurant.findUnique({
     where: {
-      slug
+      slug,
     },
     select: {
       id: true,
       name: true,
       images: true,
       description: true,
-      slug: true
-    }
+      slug: true,
+    },
   });
 
   if (!restaurant) {
@@ -42,20 +39,23 @@ const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
   }
 
   return restaurant;
-}
+};
 
-export default async function RestaurantDetails({ params }: { params: { slug: string } }) {
-
+export default async function RestaurantDetails({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const restaurant = await fetchRestaurantBySlug(params.slug);
 
   return (
     <>
       <div className="bg-white w-[70%] rounded p-3 shadow">
-        <RestaurantNavBar slug={restaurant.slug}/>
+        <RestaurantNavBar slug={restaurant.slug} />
         <Title name={restaurant.name} />
         <Rating />
-        <Description description={restaurant.description}/>
-        <Images images={restaurant.images}/>
+        <Description description={restaurant.description} />
+        <Images images={restaurant.images} />
         <Reviews />
       </div>
       <div className="w-[27%] relative text-reg">

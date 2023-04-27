@@ -1,13 +1,11 @@
 import Header from "../components/Header";
 import RestaurantNavBar from "../components/RestaurantNavBar";
 import Menu from "../components/Menu";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../../prisma/prismaClient";
 
 export const metadata = {
   title: 'Menu | Milestones Grill | OpenTable',
 }
-
-const prisma = new PrismaClient();
 
 const fetchRestaurantMenu = async (slug: string) => {
   const restaurant = await prisma.restaurant.findUnique({

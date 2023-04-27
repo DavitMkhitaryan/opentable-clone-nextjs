@@ -1,13 +1,12 @@
 import Header from "./components/Header";
 import SearchSideBar from "./components/SearchSideBar";
 import RestaurantCard from "./components/RestaurantCard";
-import { PRICE, PrismaClient } from "@prisma/client";
+import { PRICE } from "@prisma/client";
+import prisma from "../../prisma/prismaClient";
 
 export const metadata = {
   title: "Search | OpenTable",
 };
-
-const prisma = new PrismaClient();
 
 const fetchRestaurantsByCity = (city: string | undefined) => {
   const select = {
@@ -20,7 +19,9 @@ const fetchRestaurantsByCity = (city: string | undefined) => {
     slug: true,
   };
 
-  if (!city) return prisma.restaurant.findMany({ select });
+  if (!city) {
+    return prisma.restaurant.findMany({ select });
+  }
 
   return prisma.restaurant.findMany({
     where: {
