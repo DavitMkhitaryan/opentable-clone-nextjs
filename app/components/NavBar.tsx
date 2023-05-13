@@ -18,7 +18,7 @@ export default function NavBar() {
       </Link>
       <div>
         <div className="flex">
-          {loading ? null : data ? (
+          {data ? (
             <button className="bg-blue-400 text-white border p-1 px-4 rounded mr-3" onClick={signout}>
               Sign out
             </button>
