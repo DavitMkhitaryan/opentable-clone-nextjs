@@ -17,11 +17,15 @@ export default function NavBar() {
         OpenTable{" "}
       </Link>
       <div>
-        <div className="flex">
+        <div className="flex items-center">
+          {loading ? <div className="absolute w-[100%] h-[5%] bg-white"></div> : null}
           {data ? (
+            <>
+            <p className="mr-4 border border-gray-200 p-1 px-4">{data.firstName} {data.lastName}</p>
             <button className="bg-blue-400 text-white border p-1 px-4 rounded mr-3" onClick={signout}>
               Sign out
             </button>
+            </>
           ) : (
             <>
               <AuthModal isSignIn={true} />
