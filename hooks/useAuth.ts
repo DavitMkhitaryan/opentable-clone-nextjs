@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthenticationContext } from "../app/context/AuthContext";
 import { removeCookies } from "cookies-next";
 
+
 const useAuth = () => {
 
   const { setAuthState } = useContext(AuthenticationContext);
